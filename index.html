@@ -1,0 +1,44 @@
+<head>
+    <link rel="stylesheet" href="opening.css">
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="socrates.css">
+</head>
+
+<div class="black-background"></div>
+
+<div id="opening-screen">
+    <div class="bubble" id="narration">The world goes dark, but not silent. Frightening sounds rush past your ears, and you sense you are traveling great distances in very short amounts of time.
+        Slowly, the blackness clears, revealing...    Athens, 399 B.C. -- The birthplace of Philosophy.</div>
+    <div class="bubble" id="prompt">Would you like to play a game of life...    and death?</div>
+    <div class="bubble" id="play-button" onClick="play()">Yeah, I'm not scared.</div>
+    <div id="speech" class="bubble"></div>
+    <img class="img" id="athens" src="athens.jpeg" />
+</div>
+
+<div id="socrates">
+    <div style="flex: 1; margin-right: 20px;">
+        <img width="500" src="socrates.jpeg" />
+        <div class="bubble" id="socrates-speech">
+            Hello, traveler. What a stroke of luck it is to run into you--
+            I've been doing a lot of thinking, and I have some important questions I need to ask someone.
+        </div>
+    </div>
+    <div style="flex: 1">
+        <div class="bubble">hello</div>
+    </div>
+</div>
+
+<script>
+    stage = 0
+
+    play_button = document.getElementById('play-button')
+    opening_screen = document.getElementById('opening-screen')
+    socrates = document.getElementById('socrates')
+
+    function play() {
+        opening_screen.style.display = 'none';
+        socrates.style.display = 'flex';
+    }
+    
+    
+</script>

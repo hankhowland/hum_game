@@ -1,0 +1,11 @@
+#socrates {
+    display:none;
+    position: absolute;
+    left: 200px;
+    top: 200px;
+    flex-direction: row;
+}
+
+#socrates-speech {
+    
+}
