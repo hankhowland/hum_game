@@ -22,17 +22,17 @@
             the famed greek philosopher.
         </div>
         <img width="100%" src="socrates.jpeg" style="margin-bottom: 20px; border: 2px solid white;"/>
-        <div class="bubble">
+        <div class="bubble" id="question">
             "Hello, traveler. What a stroke of luck it is to run into you--
             I've been doing a lot of thinking, and I have some important questions I need to ask someone."
         </div>
     </div>
     <div style="flex: 1">
-        <div style="color: white; margin-bottom: 50px;">Choose how would you like to respond:</div>
-        <div class="bubble option" style="margin-bottom:20px">
+        <div style="color: white; margin-bottom: 50px;">Choose how you would like to respond:</div>
+        <div class="bubble option" style="margin-bottom:20px" id="option1" onClick="changeOptions(1)">
             "What's good Socrates? What's on your mind?"
         </div>
-        <div class="bubble option" style="margin-bottom:20px" onClick="gameOver()">
+        <div class="bubble option" style="margin-bottom:20px" id="option2" onClick="gameOver()">
             "F off man. I've heard what your about, and I don't want you messing with my head"
         </div>
     </div>
@@ -54,6 +54,9 @@
     opening_screen = document.getElementById('opening-screen')
     socrates = document.getElementById('socrates')
     game_over = document.getElementById('game-over')
+    option1 = document.getElementById('option1')
+    option2 = document.getElementById('option2')
+    question = document.getElementById('question')
 
     function play() {
         opening_screen.style.display = 'none';
@@ -65,6 +68,28 @@
         socrates.style.display = 'none';
         game_over.style.display = 'block';
     }
-    
-    
+
+    function changeOptions(n) {
+        if (n == 1) {
+            option1.innerHTML = "Yes, terrified."
+            option1.onclick = () => {changeOptions(2)}
+            option2.innerHTML = "No, death is cool."
+            option2.onclick = () => {changeOptions(3)}
+            question.innerHTML = "Ok. For starters, do you fear death?"
+        } else if (n == 2) {
+            option1.innerHTML = "It's completely unknown. Also, you don't get to live anymore. What fun is that?"
+            option2.innerHTML = "Well what if I go to hell?"
+            option1.onclick = () => {changeOptions(4)}
+            option2.onclick = () => {changeOptions(4)}
+            question.innerHTML = "Oh, interesting... What exactly is so scary about death, though?"
+        } else if (n == 3) {
+            option1.innerHTML = "Sure, yeah!"
+            option2.innerHTML = "Oh uhhhh no. I'm not quite ready to go yet."
+            question.innerHTML = "Oh, great. Wow. You might be as wise as me -- I actually don't fear death either. Want to commit mutual suicide?"
+        } else {
+            option1.innerHTML = "Cool"
+            option2.innerHTML = "K"
+            question.innerHTML = "I've got nothing else to say."
+        } 
+    }
 </script>
