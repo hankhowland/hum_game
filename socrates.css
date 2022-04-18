@@ -1,11 +1,21 @@
 #socrates {
     display:none;
     position: absolute;
-    left: 200px;
-    top: 200px;
+    padding: 0 100;
+    top: 80px;
     flex-direction: row;
 }
 
-#socrates-speech {
-    
+.option:hover {
+    background-color: #77dfe8;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#game-over {
+    display:none;
+    position: absolute;
+    padding: 0 100;
+    top: 80px;
+    flex-direction: row;
 }

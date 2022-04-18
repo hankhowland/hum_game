@@ -16,15 +16,34 @@
 </div>
 
 <div id="socrates">
-    <div style="flex: 1; margin-right: 20px;">
-        <img width="500" src="socrates.jpeg" />
-        <div class="bubble" id="socrates-speech">
-            Hello, traveler. What a stroke of luck it is to run into you--
-            I've been doing a lot of thinking, and I have some important questions I need to ask someone.
+    <div style="flex: 1; margin-right: 80px;">
+        <div class="bubble" style="margin-bottom: 20px;">
+            When you arrive at athens, a strange old man confronts you. You recognize him as Socrates, 
+            the famed greek philosopher.
+        </div>
+        <img width="100%" src="socrates.jpeg" style="margin-bottom: 20px; border: 2px solid white;"/>
+        <div class="bubble">
+            "Hello, traveler. What a stroke of luck it is to run into you--
+            I've been doing a lot of thinking, and I have some important questions I need to ask someone."
         </div>
     </div>
     <div style="flex: 1">
-        <div class="bubble">hello</div>
+        <div style="color: white; margin-bottom: 50px;">Choose how would you like to respond:</div>
+        <div class="bubble option" style="margin-bottom:20px">
+            "What's good Socrates? What's on your mind?"
+        </div>
+        <div class="bubble option" style="margin-bottom:20px" onClick="gameOver()">
+            "F off man. I've heard what your about, and I don't want you messing with my head"
+        </div>
+    </div>
+</div>
+
+<div id="game-over">
+    <div class="bubble" style="margin-bottom: 20px">
+        <b>Game Over.</b> Wow, that was exciting. Play again?
+    </div>
+    <div class="bubble option" onClick="play()">
+        I guess...
     </div>
 </div>
 
@@ -34,10 +53,17 @@
     play_button = document.getElementById('play-button')
     opening_screen = document.getElementById('opening-screen')
     socrates = document.getElementById('socrates')
+    game_over = document.getElementById('game-over')
 
     function play() {
         opening_screen.style.display = 'none';
         socrates.style.display = 'flex';
+        game_over.style.display = 'none';
+    }
+
+    function gameOver() {
+        socrates.style.display = 'none';
+        game_over.style.display = 'block';
     }
     
     
