@@ -38,8 +38,8 @@
     </div>
 </div>
 
-<div id="game-over">
-    <div class="bubble" id="game-over-message" style="margin-bottom: 20px">
+<div id="game-over" style="width: 30%">
+    <div class="bubble" id="game-over-message" style="margin-bottom: 20px;">
         <b>Game Over.</b> You have refused to engage in philosophical debate. Play again?
     </div>
     <div class="bubble option" onClick="play()">
@@ -124,10 +124,17 @@
                 gameOver(); 
             }
             option2.innerHTML = "Not exactly. I think I would draw the line somewhere. Like I would never murder or hurt someone else. But the only reason I don't commit a lot of petty crimes, like theft or drug use, is for fear of being caught."
-            /* TODO: option2.onclick */
+            option2.onclick = () => {changeOptions(14)}
         } else if (n == 7) {
-            /* illegal to donate to charity --TODO */
+            /* illegal to donate to charity */
             question.innerHTML = "Ok, but say that something is illegal, but not wrong. Like what if they made donating to charity illegal? Would you still think it was wrong to break that law?"
+            option1.innerHTML = "In that case, no, I don't think it would be wrong. You can't just blindly trust the system, and if the laws are that dumb, you shouldn't have to follow them."
+            option1.onclick = () => {changeOptions(5)}
+            option2.innerHTML = "Yes, if the government has decided something is illegal, they must have a good reason. I don't try to understand every law, I just trust the system."
+            option2.onclick = () => {
+                game_over_message.innerHTML = "<b>Game Over.</b> You and Socrates are in complete agreement, and he has nothing more to discuss. Play again?"
+                gameOver();
+            }
         } else if (n == 8) {
             /* wanting to do something != something is right */
             question.innerHTML = "But just because you want to do something, that doesn't make it right. Mass murderers want to kill lots of people, but it's not right for them to do so. What do you say to that?"
@@ -206,6 +213,15 @@
                 game_over_message.innerHTML = "<b>Game Over.</b> You and Socrates have reached a bregrudging agreement, and he has nothing more to discuss. Play again?"
                 gameOver();
             }
+        } else if (n == 14) {
+            question.innerHTML = "Ah, so you do have a moral compass after all. But why are those smaller crimes, like theft or drug use, okay? You are hurting the store you steal from, or the people's lives you disrupt when you are on drugs."
+            option1.innerHTML = "To be honest, I don't really care if a store loses $5, I need those Reese's peanut butter cups way more than they need a slightly fatter profit margin. I just don't want a murder on my conscience for the rest of my life."
+            option1.onclick = () => {
+                game_over_message.innerHTML = "<b>Game Over.</b> You are utterly self-interested, and Socrates has nothing more to say to you. Play again?"
+                gameOver(); 
+            }
+            option2.innerHTML = "Well sometimes things are made illegal that are perfectly harmless. Like smoking weed! It's much less dangerous than drinking, and yet it is mostly illegal where drinking is legal almost everywhere. This is why we shouldn't just follow the law blindly."
+            option2.onclick = () => {changeOptions(10)}
         }
     }
 </script>
