@@ -9,38 +9,38 @@
 <div id="opening-screen">
     <div class="bubble" id="narration">The world goes dark, but not silent. Frightening sounds rush past your ears, and you sense you are traveling great distances in very short amounts of time.
         Slowly, the blackness clears, revealing...    Athens, 399 B.C. -- The birthplace of Philosophy.</div>
-    <div class="bubble" id="prompt">Would you like to play a game of life...    and death?</div>
+    <div class="bubble" id="prompt">Would you like play a game?</div>
     <div class="bubble" id="play-button" onClick="play()">Yeah, I'm not scared.</div>
     <div id="speech" class="bubble"></div>
     <img class="img" id="athens" src="athens.jpeg" />
 </div>
 
-<div id="socrates">
-    <div style="flex: 1; margin-right: 80px;">
-        <div class="bubble" style="margin-bottom: 20px;">
-            When you arrive at athens, a strange old man confronts you. You recognize him as Socrates, 
+<div id="socrates" style="width: 70%;">
+    <div style="width: 50%; margin-right: 80px;">
+        <div id="top-prompt" class="bubble" style="margin-bottom: 20px;">
+            When you arrive at Athens, a strange old man confronts you. You recognize him as Socrates, 
             the famed greek philosopher.
         </div>
         <img width="100%" src="socrates.jpeg" style="margin-bottom: 20px; border: 2px solid white;"/>
         <div class="bubble" id="question">
-            "Hello, traveler. What a stroke of luck it is to run into you--
-            I've been doing a lot of thinking, and I have some important questions I need to ask someone."
+            Hello, traveler. What a stroke of luck it is to run into you--
+            I've been doing a lot of thinking, and I have some important questions I need to ask someone.
         </div>
     </div>
-    <div style="flex: 1">
+    <div style="width: 50%; flex: 1">
         <div style="color: white; margin-bottom: 50px;">Choose how you would like to respond:</div>
         <div class="bubble option" style="margin-bottom:20px" id="option1" onClick="changeOptions(1)">
-            "What's good Socrates? What's on your mind?"
+            Uhhhh... Sure, I've got time. What's on your mind?
         </div>
         <div class="bubble option" style="margin-bottom:20px" id="option2" onClick="gameOver()">
-            "F off man. I've heard what your about, and I don't want you messing with my head"
+            I'm actually kind of busy right now, so I don't have any time for silly philosophical arguments.
         </div>
     </div>
 </div>
 
 <div id="game-over">
-    <div class="bubble" style="margin-bottom: 20px">
-        <b>Game Over.</b> Wow, that was exciting. Play again?
+    <div class="bubble" id="game-over-message" style="margin-bottom: 20px">
+        <b>Game Over.</b> You have refused to engage in philosophical debate. Play again?
     </div>
     <div class="bubble option" onClick="play()">
         I guess...
@@ -57,6 +57,8 @@
     option1 = document.getElementById('option1')
     option2 = document.getElementById('option2')
     question = document.getElementById('question')
+    top_prompt = document.getElementById('top-prompt');
+    game_over_message = document.getElementById('game-over-message');
 
     function play() {
         opening_screen.style.display = 'none';
@@ -65,31 +67,145 @@
     }
 
     function gameOver() {
+        top_prompt.innerHTML = "When you arrive at athens, a strange old man confronts you. You recognize him as Socrates, the famed greek philosopher."
+        question.innerHTML = "Hello, traveler. What a stroke of luck it is to run into you--I've been doing a lot of thinking, and I have some important questions I need to ask someone."
+        option1.innerHTML = "Uhhhh... Sure, I've got time. What's on your mind?"
+        option2.innerHTML = "I'm actually kind of busy right now, so I don't have any time for silly philosophical arguments."
+        option1.onclick = () => {changeOptions(1)}
+        option2.onclick = () => {gameOver()}
         socrates.style.display = 'none';
         game_over.style.display = 'block';
+
     }
 
     function changeOptions(n) {
         if (n == 1) {
-            option1.innerHTML = "Yes, terrified."
+            /* wrongly imprisoned */
+            question.innerHTML = "Ok, here's my question. Let's say a man is imprisoned for a crime he didn't commit--all the right legal procedures were followed properly, but the jury simply came to the wrong conclusion. Is it wrong, morally, for him to escape from prison?"
+            option1.innerHTML = "Yes, I think that would be wrong."
             option1.onclick = () => {changeOptions(2)}
-            option2.innerHTML = "No, death is cool."
+            option2.innerHTML = "No, I don't see anything immoral with a wrongfully imprisoned man breaking free from prison."
             option2.onclick = () => {changeOptions(3)}
-            question.innerHTML = "Ok. For starters, do you fear death?"
         } else if (n == 2) {
-            option1.innerHTML = "It's completely unknown. Also, you don't get to live anymore. What fun is that?"
-            option2.innerHTML = "Well what if I go to hell?"
+            /* why is it wrong to escape */
+            question.innerHTML = "Finally, someone who agrees with me! I have my own reasons for thinking it's wrong, but I would like to hear yours first. What are they?"
+            option1.innerHTML = "It's illegal to break out of prison, and it's wrong to do something that's illegal. Simple as that."
             option1.onclick = () => {changeOptions(4)}
-            option2.onclick = () => {changeOptions(4)}
-            question.innerHTML = "Oh, interesting... What exactly is so scary about death, though?"
+            option2.innerHTML = "Well, if all the proper procedures were followed, then that's just how the system worked, and a man who has bought into the system should live with the outcomes that decision leads to."
+            option2.onclick = () => {changeOptions(5)}
         } else if (n == 3) {
-            option1.innerHTML = "Sure, yeah!"
-            option2.innerHTML = "Oh uhhhh no. I'm not quite ready to go yet."
-            question.innerHTML = "Oh, great. Wow. You might be as wise as me -- I actually don't fear death either. Want to commit mutual suicide?"
-        } else {
-            option1.innerHTML = "Cool"
-            option2.innerHTML = "K"
-            question.innerHTML = "I've got nothing else to say."
-        } 
+            /* why is it right to escape */
+            question.innerHTML = "Ahhh, another fool I see. People keep telling me that, but I just can't understand. Please try to explain why it's moral."
+            option1.innerHTML = "If that person didn't do anything illegal, then it's wrong for them to be in prison in the first place. So it can't be wrong for them to escape."
+            option1.onclick = () => {changeOptions(5)}
+            option2.innerHTML = "Well, if I was imprisoned, wrongly or not, I would want to escape -- who wants to live in a prison cell? Therefore, I can't see how it's right for me to blame someone else for doing something I would do."
+            option2.onclick = () => {changeOptions(8)}
+        } else if (n == 4) {
+            /* why is it wrong to do something illegal */
+            question.innerHTML = "Hmmm... that is sort of what I was thinking. Let's dig a little deeper though. Why is it wrong to do something illegal?"
+            option1.innerHTML = "Because you might get punished, and I don't want to be punished!"
+            option1.onclick = () => {changeOptions(6)}
+            option2.innerHTML = "Because things that are illegal are made illegal because they are wrong."
+            option2.onclick = () => {changeOptions(7)}
+        } else if (n == 5) {
+            /* "buying into society" quote */
+            top_prompt.innerHTML = '“You must either persuade [society] or obey its orders, and endure in silence whatever it instructs you to endure, whether blows or bonds, and if it leads you into war to be wounded or killed, you must obey” (Crito)'
+            question.innerHTML = "Hmmm... Interesting. Consider the quote above. Would you say you agree with it?"
+            option1.innerHTML = "Yes, exactly! I would die for my country without a second thought."
+            option1.onclick = () => {changeOptions(9)}
+            option2.innerHTML = 'Well I don\'t know... What do you mean by "persuade society," that seems like it would be a pretty difficult task.'
+            option2.onclick = () => {changeOptions(10)}
+        } else if (n == 6) {
+            /* committing a crime if you were sure you wouldn't be caught */
+            question.innerHTML = "So if you were 100% sure you wouldn't be caught, you would be fine committing a crime?"
+            option1.innerHTML = "Exactly. As long it doesn't hurt me, I'm all for it." /* ENDING: complete self interest */
+            option1.onclick = () => {
+                game_over_message.innerHTML = "<b>Game Over.</b> You are utterly self-interested, and Socrates has nothing more to say to you. Play again?"
+                gameOver(); 
+            }
+            option2.innerHTML = "Not exactly. I think I would draw the line somewhere. Like I would never murder or hurt someone else. But the only reason I don't commit a lot of petty crimes, like theft or drug use, is for fear of being caught."
+            /* TODO: option2.onclick */
+        } else if (n == 7) {
+            /* illegal to donate to charity --TODO */
+            question.innerHTML = "Ok, but say that something is illegal, but not wrong. Like what if they made donating to charity illegal? Would you still think it was wrong to break that law?"
+        } else if (n == 8) {
+            /* wanting to do something != something is right */
+            question.innerHTML = "But just because you want to do something, that doesn't make it right. Mass murderers want to kill lots of people, but it's not right for them to do so. What do you say to that?"
+            option1.innerHTML = "Hmmm... I see your point. But it's still fine for a wrongly convicted man to escape. He has done nothing wrong!"
+            option1.onclick = () => {changeOptions(5)}
+            option2.innerHTML = "Ok, but I don't really care what's right or wrong. I think everyone should just do what they want, and try not to step on eachother's toes too much." 
+            option2.onclick = () => { /* ENDING: don't care about morals */
+                game_over_message.innerHTML = "<b>Game Over.</b> Seems like you don't care about morals at all, and Socrates has nothing more to say to you. Play again?"
+                gameOver(); 
+            }
+        } else if (n == 9) {
+            question.innerHTML = "Wow, a true patriot. That is very honorable. It only follows, then, that if society instructs you to suffer for a crime you didn't commit, you still must endure that suffering in silence, right?"
+            option1.innerHTML = "Yes, agreed. Although I hope that doesn't happen to me, I think it is right to not try to escape."
+            option1.onclick = () => {
+                game_over_message.innerHTML = "<b>Game Over.</b> You and Socrates are in complete agreement, and he has nothing more to discuss. Play again?"
+                gameOver();
+            }
+            option2.innerHTML = "Actually, I was more thinking along the lines of war. If society gives you an unjust punishment, I think it is right to resist that by any means necessary."
+            option2.onclick = () => {changeOptions(10)}
+        } else if (n == 10) {
+            question.innerHTML = `Well, if you don't like the way society works, you have the option to persuade them to change that. For example, you can petition to change laws or procedures that you believe to be unjust. 
+            However, if laws have been enacted upon you, and you couldn't persuade society to change those laws, then you must suffer the consequences.`
+            option1.innerHTML = "Ok, Socrates, I guess I see your point. Society has given me a lot, so it's only right that I follow its laws without complaint."
+            option1.onclick = () => {
+                game_over_message.innerHTML = "<b>Game Over.</b> You and Socrates have reached a bregrudging agreement, and he has nothing more to discuss. Play again?"
+                gameOver();
+            }
+            option2.innerHTML = `I think you are vastly underestimating how hard it is to change a law. There are millions of people in my country, and it takes a massive political movement to make any
+                actual legislative change. If I wanted to persuade society to change a law, I would probably have to dedicate my life to the cause. Also some groups of people
+                would find it a lot harder to persuade society to change than others, based on their social standing and wealth. How is that right?`
+            option2.onclick = () => {changeOptions(11)}
+        } else if (n == 11) {
+            top_prompt.innerHTML = `“You have had seventy years during which you could have gone away if you did not like us, and if you thought our agreements unjust” (Personifying Society, in Crito)`
+            question.innerHTML = `Hmmm... I think I see what you mean. Whatever country you're from, it seems to be a lot bigger and more diverse than Rome.
+                Ok, well what about the quote above? You could always just leave the country you are in if you don't like it. By staying in your country, 
+                you are essentially giving it your permission to impose its laws upon you.`
+            option1.innerHTML = "I guess you're right, I could always just leave. It would suck to leave my community behind, but logically, you're reasoning is sound, so I am forced to agree."
+            option1.onclick = () => {
+                game_over_message.innerHTML = "<b>Game Over.</b> You and Socrates have reached a bregrudging agreement, and he has nothing more to discuss. Play again?"
+                gameOver();
+            }
+            option2.innerHTML = `Ok, but I was born into the country I'm from, and immigration laws are quite strict. 
+                It can take years to get a green card so that you can legally become a citizen of another country, and I don't think you would deem the alternative option of immigrating
+                illegally to be very moral. So do I really have any choice in what country I live in?`
+            option2.onclick = () => {changeOptions(12)}
+        } else if (n == 12) {
+            question.innerHTML = `Hmmm... that does sound a little different from how things are around here. Still though, by participating in society, by voting and using public services, I still think you 
+                are implicitly giving your consent to the laws that society imposes on you. And it is immoral to break an agreement for selfish reasons, which is what breaking free from prison would be doing.`
+            option1.innerHTML = `But I don't think it would necessarily be a selfish decision. I feel a much deeper moral obligation to my community and my family than
+                I do to my country. My country is just this system that I was born into, and forced to function within. It is not something I value enough
+                to be worth abandoning the people that mean something in my life. Don't you think it would be moral to break free from prison, if it was for the 
+                purpose of supporting your family and friends?`
+            option1.onclick = () => {changeOptions(13)}
+            option2.innerHTML = "Yeah, you're right, Socrates. I really hate to admit it, but you are truly the wisest of them all."
+            option2.onclick = () => {
+                game_over_message.innerHTML = "<b>Game Over.</b> You and Socrates have reached a bregrudging agreement, and he has nothing more to discuss. Play again?"
+                gameOver();
+            }
+        } else if (n == 13) {
+            top_prompt.innerHTML = `"Do not value either your children or your life or anything else more than your goodness, in order that when you arrive in Hades you may have all this as your defense before the rulers there." (Crito)`
+            question.innerHTML = `You're logic is flawed once again. Consider the quote above. It states that nothing should trump living a moral life,
+                not even your children. Although you may feel an emotional relationship to your family, you must be able to put that aside
+                and focus on what is truly important -- upholding the agreement you have with society, and being moral and good.`
+            option1.innerHTML = `Socrates, I think you are misunderstanding the nature of the society I live in. In order to "succeed" in life,
+                you must either have the family wealth to pay for a college education, go into large amounts of debt to get a degree and hope it pays off in a couple decades,
+                or work menial jobs 5 days a week for practically your entire adult life. Sure, society offers me some benefits, like functioning roads
+                and public libraries, but in our current system, you could work hard your whole life, and still have a pretty terrible go at it, if you weren't born into 
+                the right situation. So you might be able to see why I don't feel a lot of obligation to follow the laws society imposes upon me, especially
+                when they lead to a wrongful conviction.`
+            option1.onclick = () => {
+                game_over_message.innerHTML = "<b>Game Over.</b> You have convinced Socrates that his ideas don't necessarily translate to modern society. Play again?"
+                gameOver();
+            }
+            option2.innerHTML = "Ok, ok, I give up. You're right Socrates, it is wrong for someone to escape from prison, even if they are wrongly convicted."
+            option2.onclick = () => {
+                game_over_message.innerHTML = "<b>Game Over.</b> You and Socrates have reached a bregrudging agreement, and he has nothing more to discuss. Play again?"
+                gameOver();
+            }
+        }
     }
 </script>

@@ -9,7 +9,6 @@
 .option:hover {
     background-color: #77dfe8;
     cursor: pointer;
-    font-weight: bold;
 }
 
 #game-over {
